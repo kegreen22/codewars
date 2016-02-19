@@ -7,44 +7,46 @@
 # 110 is not a vampire number since there are three 1's in the
 # multiplicands, but only two 1's in the product
 # Create a function that can receive two 'fangs' and determine if the product of the two is a valid vampire number.
-require 'set'  # needed to see if numbers are a subset of their product
-
 def vampire_test(num1, num2)
   product = num1 * num2
   vampire = false
 
-    # check criteria - that both numbers don't end in zero
   check1 = num1.to_s.split('') #split the numbers into strings and put them into an array to facilitate checking
   check2 = num2.to_s.split('')
 
-  # puts check1
-  # puts check2
+  # check that all of the numbers in the factors appear in the product
 
-  if ((check1[-1] == '0') && (check2[-1] == '0'))
-    puts "The two numbers are #{num1} and #{num2} and they are not fangs of the product #{product}"
+  product_check = product.to_s.split('')
 
-  elsif
-    # check that all of the numbers in the factors appear in the product
-    #check1_set = check1.to_set
-    #check2_set = check2.to_set
-    product_check = product.to_s.split('')
+  flag1, flag2 = true
+  flag1 = array_check(check1, product_check)
+  flag2 = array_check(check2, product_check)
 
-    #product_check_set = product_check.to_set
-    check3 = check1 + check2
-    p check3
-    p product_check
+    if (flag1 && flag2) == true
+      puts "The two numbers are #{num1} and #{num2} and they are fangs of the product #{product}"
+      return true   # values are vampire numbers
 
-      if product_check.eql?(check3)
-        # if (check1_set.subset?(product_check_set) && check2_set.subset?(product_check_set))
-        #  if (product_check_set.proper_superset?(check1_set) && product_check_set.proper_superset?(check2_set))
-        vampire = true
-        puts "The two numbers are #{num1} and #{num2} and they are fangs of the product #{product}"
+    else
+      puts "The two numbers are #{num1} and #{num2} and they are not fangs of the product #{product}"
+      return false   # values are not vampire numbers
+
+    end
+end
+
+
+def array_check(arr, prod)   # check that the numbers appear in the product
+  flag = true
+  arr.each do |x|
+    if (prod.include?(x) == false)
+      flag = false
+      else
+        prod.include?(x)
+        index_to_remove = prod.index(x)
+        prod.slice!(index_to_remove)
       end
-  else
-    puts "The two numbers are #{num1} and #{num2} and they are not fangs of the product #{product}"
 
   end
-
+    flag
 end
 
 # test values
