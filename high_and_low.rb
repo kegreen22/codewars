@@ -1,7 +1,6 @@
 def high_and_low(number)
-# collapse string, put into array, sort and print out the first and last elements
-# number = number.to_s
 
+# put the input into an array and sort the numbers, choosing the highest (last) and first (lowest)
 high = number.split(' ').sort.last
 low = number.split(' ').sort.first
 
